@@ -1,4 +1,4 @@
-class customer {
+class Customer {
     name: string;
 
     constructor(name: string) {

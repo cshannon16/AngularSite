@@ -1,34 +1,37 @@
-(function () {
-    'use strict';
-
-    angular
-        .module('app.core')
-        .factory('dataservice', dataservice);
-
-    dataservice.$inject = ['$http', '$q', 'exception', 'logger'];
-    /* @ngInject */
-    function dataservice($http, $q, exception, logger) {
-        var service = {
-            getPeople: getPeople,
-            getMessageCount: getMessageCount
-        };
-
-        return service;
-
-        function getMessageCount() { return $q.when(72); }
-
-        function getPeople() {
-            return $http.get('/api/people')
-                .then(success)
-                .catch(fail);
-
-            function success(response) {
-                return response.data;
+var myapp;
+(function (myapp) {
+    var core;
+    (function (core) {
+        var DataService = (function () {
+            function DataService($http, $q, exception, logger) {
+                this.$http = $http;
+                this.$q = $q;
+                this.exception = exception;
+                this.logger = logger;
             }
-
-            function fail(e) {
-                return exception.catcher('XHR Failed for getPeople')(e);
-            }
-        }
-    }
-})();
+            DataService.prototype.getMessageCount = function () {
+                return this.$q.when(72);
+            };
+            DataService.prototype.getPeople = function () {
+                var result;
+                return this.$http.get('/api/people').then(function (response) {
+                    result = response.data;
+                    return result;
+                });
+            };
+            DataService.prototype.getUser = function () {
+                var result;
+                return this.$http.get('/api/getuser').then(function (response) {
+                    result = response.data;
+                    return result;
+                });
+            };
+            DataService.$inject = [
+                '$http',
+                '$q',
+                'exception',
+                'logger'];
+            return DataService;
+        })();
+    })(core = myapp.core || (myapp.core = {}));
+})(myapp || (myapp = {}));

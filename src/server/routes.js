@@ -1,9 +1,12 @@
 var router = require('express').Router();
 var four0four = require('./utils/404')();
 var data = require('./data');
+var user = require('./user');
 
 router.get('/people', getPeople);
 router.get('/person/:id', getPerson);
+router.get('/getuser',user.getUser);
+router.post('/adduser', user.addUser);
 router.get('/*', four0four.notFoundMiddleware);
 
 module.exports = router;
