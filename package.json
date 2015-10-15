@@ -58,6 +58,7 @@
     "gulp-tslint": "^1.4.4",
     "gulp-typescript": "^2.5.0",
     "gulp-rimraf": "^0.1.1",
+	"gulp-mocha": "^0.4.1",
     "jshint-stylish": "^2.0.1",
     "karma": "^0.13.2",
     "karma-chai": "^0.1.0",
